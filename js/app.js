@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 class ArticleNinja {
   constructor() {
     this.currentWord = {};
@@ -73,6 +75,7 @@ class ArticleNinja {
     console.table(this.words);
   }
 
+  // displays next question after specified amount of time
   nextQuestion() {
     setTimeout(() => {
       ui.displayQuestion();
@@ -162,11 +165,13 @@ class Controller {
     btnContainer.addEventListener('click', e => app.checkAnswer(e.target.dataset.art));
   }
 
+  // listens to events on add button
   addWordBtnListener() {
     const addWordBtn = document.querySelector('#addWordBtn');
     addWordBtn.addEventListener('click', e => app.addNewWord());
   }
 
+  // listens to events on setup & play button
   startAppBtnListener() {
     const startAppBtn = document.querySelector('#startBtn');
     startAppBtn.addEventListener('click', e => ui.toggleSetupAndStart());
