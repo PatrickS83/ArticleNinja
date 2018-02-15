@@ -37,26 +37,42 @@ class ArticleNinja {
 
   // gets a random word out of the array based on weighted probabilities
   getWord() {
-    const randomNumber = Math.floor((Math.random() * 100));
-    let pickedPrio;
-    if (randomNumber <= 3) pickedPrio = 0;
-    else if (randomNumber > 3 && randomNumber <= 10) pickedPrio = 4;
-    else if (randomNumber > 10 && randomNumber <= 25) pickedPrio = 3;
-    else if (randomNumber > 10 && randomNumber <= 40) pickedPrio = 2;
-    else if (randomNumber > 40 && randomNumber <= 100) pickedPrio = 1;
+    // placeholder for next random word
+    let randomWord;
 
-    const newWords = this.words.filter(word => word.prio === pickedPrio);
-    const randomWord = newWords[Math.floor(Math.random() * newWords.length)];
+    // repeats until  current word and next word are different
+    do {
+      // get random word algorithm
+      const randomNumber = Math.floor((Math.random() * 100));
+      let pickedPrio;
+      // example: 3% probability for priority 0
+      if (randomNumber <= 3) pickedPrio = 0;
+      else if (randomNumber > 3 && randomNumber <= 10) pickedPrio = 4;
+      else if (randomNumber > 10 && randomNumber <= 25) pickedPrio = 3;
+      else if (randomNumber > 10 && randomNumber <= 40) pickedPrio = 2;
+      else if (randomNumber > 40 && randomNumber <= 100) pickedPrio = 1;
+
+      const newWords = this.words.filter(word => word.prio === pickedPrio);
+      randomWord = newWords[Math.floor(Math.random() * newWords.length)];
+    } while (this.currentWord.word === randomWord.word);
     this.currentWord = randomWord;
     return randomWord;
   }
 
+  // checks if answer by user is correct
   checkAnswer(btnArticle) {
     if (btnArticle === this.currentWord.art) {
       ui.displayAnswer('correct');
+      this.nextQuestion();
     } else {
       ui.displayAnswer('wrong');
     }
+  }
+
+  nextQuestion() {
+    setTimeout(() => {
+      ui.displayQuestion();
+    }, 800);
   }
 }
 
