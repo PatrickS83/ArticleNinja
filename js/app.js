@@ -107,6 +107,7 @@ class Controller {
     this.answerButtonListener();
   }
 
+  // listens to clickevent on answerbuttons
   answerButtonListener() {
     const btnContainer = document.querySelector('.answer_buttons');
     btnContainer.addEventListener('click', e => app.checkAnswer(e.target.dataset.art));
