@@ -10,7 +10,7 @@ class ArticleNinja {
       {
         art: 'das',
         word: 'Bier',
-        prio: 3
+        prio: 5
       },
       {
         art: 'der',
@@ -46,15 +46,14 @@ class ArticleNinja {
       const randomNumber = Math.floor((Math.random() * 100));
       let pickedPrio;
       // example: 5% probability for priority 0
-      if (randomNumber <= 5) pickedPrio = 5;
-      else if (randomNumber > 5 && randomNumber <= 15) pickedPrio = 4;
-      else if (randomNumber > 15 && randomNumber <= 30) pickedPrio = 3;
-      else if (randomNumber > 30 && randomNumber <= 50) pickedPrio = 2;
-      else if (randomNumber > 50 && randomNumber <= 100) pickedPrio = 1;
-
+      if (randomNumber < 5) pickedPrio = 5;
+      else if (randomNumber >= 5 && randomNumber < 15) pickedPrio = 4;
+      else if (randomNumber >= 15 && randomNumber < 30) pickedPrio = 3;
+      else if (randomNumber >= 30 && randomNumber < 50) pickedPrio = 2;
+      else if (randomNumber >= 50 && randomNumber <= 100) pickedPrio = 1;
       const newWords = this.words.filter(word => word.prio === pickedPrio);
-      randomWord = newWords[Math.floor(Math.random() * newWords.length)];
-    } while (this.currentWord.word === randomWord.word);
+      randomWord = newWords[Math.floor(Math.random() * (newWords.length - 1))];
+    } while (!randomWord || this.currentWord.word === randomWord.word);
     this.currentWord = randomWord;
     return randomWord;
   }
