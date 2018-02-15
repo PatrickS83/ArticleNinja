@@ -34,7 +34,7 @@
 .wrapper {
     width: 90%;
     margin: 0 auto;
-    height: 1000%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     /* justify-content: space-around; */
@@ -43,3 +43,56 @@
 .page-footer{
     font-size: 1rem;
 }
+
+.setup{
+    color: white;
+    height: 87%;
+    width: 100%;
+    background-color: #2693a6;
+    position: absolute;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.setup_wrapper {
+    transform: translateY(-30%)
+}
+.setup label {
+    color: white !important;
+}
+
+.setup input {
+    border-bottom-color: white !important;
+}
+
+.priorityBtns {
+    display: flex;
+    justify-content: center;
+}
+
+.priorityBtns label{
+    margin-right: 1rem;
+}
+
+.input-field input[type=text]:focus + label {
+    color: #000;
+  }
+
+.playButtons {
+    margin-top: 1.5rem !important;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.addWord{
+    text-align: center;
+}
+
+.setup_heading{
+    text-align: center;
+}
+

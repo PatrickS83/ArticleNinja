@@ -5,7 +5,7 @@ class ArticleNinja {
       {
         art: 'die',
         word: 'Katze',
-        prio: 0
+        prio: 1
       },
       {
         art: 'das',
@@ -45,12 +45,12 @@ class ArticleNinja {
       // get random word algorithm
       const randomNumber = Math.floor((Math.random() * 100));
       let pickedPrio;
-      // example: 3% probability for priority 0
-      if (randomNumber <= 3) pickedPrio = 0;
-      else if (randomNumber > 3 && randomNumber <= 10) pickedPrio = 4;
-      else if (randomNumber > 10 && randomNumber <= 25) pickedPrio = 3;
-      else if (randomNumber > 10 && randomNumber <= 40) pickedPrio = 2;
-      else if (randomNumber > 40 && randomNumber <= 100) pickedPrio = 1;
+      // example: 5% probability for priority 0
+      if (randomNumber <= 5) pickedPrio = 5;
+      else if (randomNumber > 5 && randomNumber <= 15) pickedPrio = 4;
+      else if (randomNumber > 15 && randomNumber <= 30) pickedPrio = 3;
+      else if (randomNumber > 30 && randomNumber <= 50) pickedPrio = 2;
+      else if (randomNumber > 50 && randomNumber <= 100) pickedPrio = 1;
 
       const newWords = this.words.filter(word => word.prio === pickedPrio);
       randomWord = newWords[Math.floor(Math.random() * newWords.length)];
@@ -61,18 +61,37 @@ class ArticleNinja {
 
   // checks if answer by user is correct
   checkAnswer(btnArticle) {
+    const answerIndex = this.words.findIndex(word => this.currentWord.word === word.word);
+    const activeWord = this.words[answerIndex];
     if (btnArticle === this.currentWord.art) {
       ui.displayAnswer('correct');
       this.nextQuestion();
+      if (activeWord.prio !== 1) activeWord.prio -= 1;
     } else {
       ui.displayAnswer('wrong');
+      if (activeWord.prio !== 5) activeWord.prio += 1;
     }
+    console.table(this.words);
   }
 
   nextQuestion() {
     setTimeout(() => {
       ui.displayQuestion();
     }, 800);
+  }
+
+  // add new word to the list of words
+  addNewWord() {
+    const priorityBtns = Array.from(document.querySelectorAll('[data-priority]'));
+    const priorityValue = priorityBtns.filter(btn => btn.checked);
+
+    const newWord = {
+      art: document.getElementById('artikel').value,
+      word: document.getElementById('word').value,
+      prio: Number(priorityValue[0].dataset.priority)
+    };
+    this.words.push(newWord);
+    ui.resetForm();
   }
 }
 
@@ -111,6 +130,19 @@ class UI {
       answerSpan.style.display = 'inherit';
     }
   }
+
+  // reset form
+  resetForm() {
+    document.getElementById('artikel').value = '';
+    document.getElementById('word').value = '';
+    const priorityBtns = document.querySelectorAll('[data-priority]');
+    priorityBtns.forEach(btn => btn.checked = false);
+  }
+
+  // start app
+  toggleSetupAndStart() {
+    document.querySelector('.setup').style.display = 'none';
+  }
 }
 
 // handles all events and button clicks
@@ -121,12 +153,28 @@ class Controller {
 
   init() {
     this.answerButtonListener();
+    this.addWordBtnListener();
+    this.startAppBtnListener();
   }
 
   // listens to clickevent on answerbuttons
   answerButtonListener() {
     const btnContainer = document.querySelector('.answer_buttons');
     btnContainer.addEventListener('click', e => app.checkAnswer(e.target.dataset.art));
+  }
+
+  addWordBtnListener() {
+    const addWordBtn = document.querySelector('#addWordBtn');
+    addWordBtn.addEventListener('click', e => app.addNewWord());
+  }
+
+  startAppBtnListener() {
+    const startAppBtn = document.querySelector('#startBtn');
+    startAppBtn.addEventListener('click', e => ui.toggleSetupAndStart());
+    const setupBtn = document.querySelector('#setupBtn');
+    setupBtn.addEventListener('click', (e) => {
+      document.querySelector('.setup').style.display = 'inherit';
+    });
   }
 }
 

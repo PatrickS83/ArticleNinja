@@ -14,12 +14,46 @@
         <nav>
             <div class="nav-wrapper">
                 <a href="#" class="brand-logo">ArticleNinja</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="">Link1</a></li>
-                </ul>
+                <a id="setupBtn" class="waves-effect waves-light btn">Setup</a>
             </div>
         </nav>
-
+        <div class="setup">
+            <div class="setup_wrapper">
+                <h3 class= "setup_heading">Add your word</h3>
+            <div class="addWord">
+                <div class="col s12">
+                    <div class="input-field inline">
+                    <input id="artikel" type="text">
+                    <label for="artikel" data-error="wrong" data-success="right">Artikel</label>
+                    </div>
+                </div>
+                <div class="col s12">
+                    <div class="input-field inline">
+                    <input id="word" type="text">
+                    <label for="word" data-error="wrong" data-success="right">Word</label>
+                    </div>
+                </div>
+            </div>
+            <div class = "priorityBtns">
+                    <p>
+                      <input data-priority="1" class="with-gap" name="group1" type="radio" id="easyBtn" />
+                      <label for="easyBtn">Easy</label>
+                    </p>
+                    <p>
+                      <input data-priority="3" class="with-gap" name="group1" type="radio" id="mediumBtn" />
+                      <label for="mediumBtn">Medium</label>
+                    </p>
+                    <p>
+                      <input data-priority="5" class="with-gap" name="group1" type="radio" id="hardBtn"  />
+                      <label for="hardBtn">Hard</label>
+                    </p>
+                </div>
+                <div class="playButtons">
+                <a id ="addWordBtn" class="waves-effect waves-light btn"><i class="material-icons left">add_circle</i>Add word</a>
+                <a id ="startBtn" class="waves-effect waves-light btn"><i class="material-icons left">check_circle</i>Play</a>
+                </div>
+            </div>
+        </div>
         <div class="wrapper">
             <div class="card flash_card z-depth-3">
                 <h3 class="askedWord"></h3>
